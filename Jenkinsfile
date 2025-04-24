@@ -15,7 +15,7 @@ podTemplate(
         )
     ]
 ) {
-    node(POD_LABEL) {
+    node(jenkins_label) {
         stage('Prepare Environment') {
             container('dockerimage') {
                 // Verify tools are available
