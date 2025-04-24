@@ -1,55 +1,28 @@
-FROM jenkins/jenkins:lts-jdk17
-USER root
+# Use Docker-in-Docker base image
+From docker:dind
+# Enable community/testing repositories and install prerequisites
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+    apk update && \
+    apk add --no-cache \
+        bash \
+        curl \
+        unzip \
+        python3 \
+        py3-pip \
+        git \
+        sudo && \
+    rm -rf /var/cache/apk/*
 
-# Install prerequisites
-RUN apt-get update && \
-    apt-get install -y \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release \
-    software-properties-common \
-    unzip
-
-# Install Docker
-RUN mkdir -p /etc/apt/keyrings && \
-    curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list && \
-    apt-get update && \
-    apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-
-# Install Terraform
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg && \
-    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" > /etc/apt/sources.list.d/hashicorp.list && \
-    apt-get update && \
-    apt-get install -y terraform
-
-# Install AWS CLI v2
+# Install AWS CLI v2 (official method)
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
-    ./aws/install && \
+    ./aws/install --bin-dir /usr/local/bin && \
     rm -rf awscliv2.zip aws
-
-# Install kubectl
-RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
-    install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
-    rm kubectl
-
-# Install Node.js (if needed for your app)
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
-    apt-get install -y nodejs
-
-# Clean up
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-
-RUN jenkins-plugin-cli --plugins \
-    kubernetes \
-    workflow-aggregator \
-    git \
-    configuration-as-code \
-    credentials \
-    credentials-binding
-
-USER jenkins
+# Install Terraform
+ARG TERRAFORM_VERSION=1.7.5
+RUN curl -fsSL https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o terraform.zip && \
+    unzip terraform.zip && \
+    mv terraform /usr/local/bin/ && \
+    chmod +x /usr/local/bin/terraform && \
+    rm terraform.zip

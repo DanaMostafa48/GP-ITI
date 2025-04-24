@@ -1,12 +1,12 @@
-image:
-  registry: 661013218527.dkr.ecr.us-east-1.amazonaws.com
-  repository: node-app-jenkins2
-  tag: latest
-  pullPolicy: Always
+# image:
+#   registry: 661013218527.dkr.ecr.us-east-1.amazonaws.com
+#   repository: node-app-jenkins2
+#   tag: latest
+#   pullPolicy: Always
   
 
-imagePullSecrets:
-  - name: ecr-credentials
+# imagePullSecrets:
+#   - name: ecr-credentials
 
 installPlugins:
     - git
@@ -56,10 +56,10 @@ persistence:
   annotations: {}
 
 
-serviceAccount:
-  create: true
-  annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::661013218527:role/ecr-access-role"
+# serviceAccount:
+#   create: true
+#   annotations:
+#     eks.amazonaws.com/role-arn: "arn:aws:iam::661013218527:role/ecr-access-role"
 
 
 # {

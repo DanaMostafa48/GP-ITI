@@ -22,43 +22,43 @@ resource "helm_release" "jenkins" {
   values = [
     file("/nginx-values.yaml")
   ]
-  set {
-    name  = "controller.serviceType"
-    value = "LoadBalancer"
-  }
+#   set {
+#     name  = "controller.serviceType"
+#     value = "LoadBalancer"
+#   }
 
-  set {
-    name  = "controller.servicePort"
-    value = "8080"
-  }
+#   set {
+#     name  = "controller.servicePort"
+#     value = "8080"
+#   }
 
-  set {
-    name  = "controller.serviceTargetPort"
-    value = "8080"
-  }
+#   set {
+#     name  = "controller.serviceTargetPort"
+#     value = "8080"
+#   }
 
-  set {
-    name  = "persistence.storageClass"
-    value = "gp2"
-  }
+#   set {
+#     name  = "persistence.storageClass"
+#     value = "gp2"
+#   }
 
-  set {
-    name  = "persistence.size"
-    value = "8Gi"
-  }
-  set {
-    name  = "controller.admin.username"
-    value = "admin"
-  }
+#   set {
+#     name  = "persistence.size"
+#     value = "8Gi"
+#   }
+#   set {
+#     name  = "controller.admin.username"
+#     value = "admin"
+#   }
 
-  set {
-    name  = "controller.admin.password"
-    value = ""  
-  }
+#   set {
+#     name  = "controller.admin.password"
+#     value = ""  
+#   }
 
-  set {
-    name  = "controller.install.plugins"
-    value = "{kubernetes:1.30.1,workflow-aggregator:2.6,git:4.8.2,configuration-as-code:1.52}"
-  }
+#   set {
+#     name  = "controller.install.plugins"
+#     value = "{kubernetes:1.30.1,workflow-aggregator:2.6,git:4.8.2,configuration-as-code:1.52}"
+#   }
 
-}
+ }
