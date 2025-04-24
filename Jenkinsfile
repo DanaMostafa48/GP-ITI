@@ -2,6 +2,8 @@ pipeline {
     agent {
         'jenkins_label'
     }
+        label 'jenkins_label' // corrected this line
+    }
     environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
@@ -16,55 +18,44 @@ pipeline {
     }
 
     stages {
-        // STAGE 1: Checkout SCM
         stage('Checkout') {
             steps {
                 checkout  scm
             }
         }
 
-        // STAGE 2: Terraform Init & Output
         stage('Get Terraform Output') {
             steps {
                 dir('terraform') {
                     script {
-                        // Initialize Terraform (if needed)
                         sh 'terraform init'
 
-                        // Fetch ECR registry URL
-                        REGISTRY = sh(
+                        env.REGISTRY = sh(
                             script: 'terraform output -raw aws_ecr_repository | cut -d "/" -f1',
                             returnStdout: true
                         ).trim()
-                        
-                        // Fetch ECR repository name
-                        REPOSITORY = sh(
+
+                        env.REPOSITORY = sh(
                             script: 'terraform output -raw aws_ecr_repository | cut -d "/" -f2',
                             returnStdout: true
                         ).trim()
-
-                        env.REPOSITORY = REPOSITORY
-                        env.REGISTRY = REGISTRY
                     }
                 }
             }
         }
 
-        // STAGE 3: Build & Push Docker Image
         stage('Build and Push Docker Image') {
             steps {
                 dir('nodeapp') {
                     script {
-                        // Login to ECR
                         sh """
-                            aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | \
+                            aws ecr get-login-password --region ${env.AWS_DEFAULT_REGION} | \
                             docker login --username AWS --password-stdin ${env.REGISTRY}
                         """
 
-                        // Build and push
                         sh """
-                            docker build -t ${env.REGISTRY}/${env.REPOSITORY}:${DOCKER_IMAGE_TAG} .
-                            docker push ${env.REGISTRY}/${env.REPOSITORY}:${DOCKER_IMAGE_TAG}
+                            docker build -t ${env.REGISTRY}/${env.REPOSITORY}:${env.DOCKER_IMAGE_TAG} .
+                            docker push ${env.REGISTRY}/${env.REPOSITORY}:${env.DOCKER_IMAGE_TAG}
                         """
                     }
                 }
@@ -72,4 +63,3 @@ pipeline {
         }
     }
 }
-// D0yUEsTuFiBTZ0lQ1w2AaY
