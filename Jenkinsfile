@@ -1,4 +1,5 @@
 podTemplate(
+    label: 'jenkins_label',
     containers: [
         containerTemplate(
             name: 'dockerimage',
@@ -15,10 +16,9 @@ podTemplate(
         )
     ]
 ) {
-    node(jenkins_label) {
+    node('jenkins_label') {
         stage('Prepare Environment') {
             container('dockerimage') {
-                // Verify tools are available
                 sh '''
                     echo "=== Versions ==="
                     docker --version
