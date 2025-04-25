@@ -22,7 +22,7 @@ podTemplate(
                 sh '''
                     echo "=== Versions ==="
                     docker --version
-                    aws --version
+
                     terraform --version
                 '''
             }
