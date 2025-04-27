@@ -2,12 +2,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-persistent-storage-mysql-0
-  namespace: nodejs-app
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
-  storageClassName: gp2  # Change this to match the PV's storage class
-
+      storage: 2Gi

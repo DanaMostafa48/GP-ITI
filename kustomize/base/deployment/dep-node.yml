@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nodejs-app
-  namespace: nodejs-app
 spec:
   replicas: 1
   selector:
@@ -15,7 +14,7 @@ spec:
     spec:
       containers:
         - name: nodejs-app
-          image: 657433765520.dkr.ecr.us-east-1.amazonaws.com/node-app-jenkins2:latest
+          image: shebogimmy/node-app:latest
           ports:
             - containerPort: 3000
           env:

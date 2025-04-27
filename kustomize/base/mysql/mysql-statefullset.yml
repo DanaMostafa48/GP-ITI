@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
-  namespace: nodejs-app
+  namespace: default
 spec:
   serviceName: "mysql-service"
   replicas: 1
@@ -16,25 +16,20 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: mysql:5.7
+          image: mysql:latest
           ports:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: rootpassword
+              value: "rootpassword"
             - name: MYSQL_USER
-              value: admin
+              value: "admin"
             - name: MYSQL_PASSWORD
-              value: secretpassword
+              value: "secretpassword"
           volumeMounts:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
-  volumeClaimTemplates:
-    - metadata:
-        name: mysql-persistent-storage
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 5Gi
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-persistent-storage-mysql-0
