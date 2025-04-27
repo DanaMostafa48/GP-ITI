@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/DanaMostafa48/GP-ITI'
-    targetRevision: yousra
+    targetRevision: HEAD
     path: argocd/overlays
   destination:
     server: 'https://kubernetes.default.svc'
