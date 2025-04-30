@@ -16,7 +16,7 @@ spec:
       serviceAccountName: external-secrets-sa
       containers:
         - name: nodejs-app
-          image: yousra000/nodejs-mysql:latest
+          image: 661013218527.dkr.ecr.us-east-1.amazonaws.com/node-app-jenkins2:latest
           ports:
             - containerPort: 3000
           env:
