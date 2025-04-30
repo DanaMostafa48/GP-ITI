@@ -3,6 +3,13 @@ kind: Application
 metadata:
   name: nodejs
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: node=661013218527.dkr.ecr.us-east-1.amazonaws.com/node-app-jenkins2
+    argocd-image-updater.argoproj.io/node.update-strategy: latest
+    argocd-image-updater.argoproj.io/ecr-access-key: "ecr-credentials"
+    argocd-image-updater.argoproj.io/ecr-secret-key: "ecr-credentials"
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/git-branch: main
 spec:
   project: default
   source:
@@ -11,10 +18,8 @@ spec:
     path: kustomize/overlays
   destination:
     server: https://F89E6EB0F48432E519169ECF87B22A8F.gr7.us-east-1.eks.amazonaws.com
-    
+    namespace: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-
-
