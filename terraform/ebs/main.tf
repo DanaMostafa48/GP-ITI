@@ -90,7 +90,7 @@ resource "aws_iam_role" "argocd_ecr_role" {
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
           StringEquals = {
-            "${replace(var.eks_oidc_provider_url, "https://", "")}:sub" : "system:serviceaccount:argocd:argocd-service-account"
+            "${replace(var.eks_oidc_provider_url, "https://", "")}:sub" : "system:serviceaccount:argocd:argo-image-updater"
           }
         }
       }

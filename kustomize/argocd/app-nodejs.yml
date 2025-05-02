@@ -5,10 +5,9 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: myapp=661013218527.dkr.ecr.us-east-1.amazonaws.com/node-app-jenkins2
-    argocd-image-updater.argoproj.io/myapp.update-strategy: newest-build
-
-    argocd-image-updater.argoproj.io/myapp.helm.image-spec: image.repository
-    argocd-image-updater.argoproj.io/myapp.kustomize.image-name: node-app-jenkins2
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/myapp.update-strategy: semver
 spec:
   project: default
   source:

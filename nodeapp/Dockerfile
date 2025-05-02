@@ -1,4 +1,4 @@
-FROM node:slim
+FROM node:18
 RUN apt update && \
     apt install mariadb-client -y
 WORKDIR /nodeapp

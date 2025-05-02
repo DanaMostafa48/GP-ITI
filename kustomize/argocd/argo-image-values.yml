@@ -3,7 +3,7 @@ config:
     - name: ECR
       api_url: https://661013218527.dkr.ecr.us-east-1.amazonaws.com
       prefix: 661013218527.dkr.ecr.us-east-1.amazonaws.com
-      credentials: ext:/scripts/ecr-login.sh
+      credentials: ext:/scripts/auth.sh
       credsexpire: 12h
       ping: yes
       default: true
@@ -22,3 +22,5 @@ serviceAccount:
   create: false
 
 
+
+#image-updater

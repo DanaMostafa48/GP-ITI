@@ -10,4 +10,34 @@ stringData:
   type: git
   url: https://github.com/DanaMostafa48/GP-ITI.git
   username: RGFuYU1vc3RhZmE0OA==
-  password: Z2hwX1BwSnNUNmlvaHpzM3cxZVR6THUwUXFtcXpseDFBWjRSYWlpNg==
+  password: Z2hwX1BwSnNUNmlvaHpzM3cxZVR6THUwUXFtcXpseDFBWjRSYWlpNgo=
+
+
+
+# helm repo add argo https://argoproj.github.io/argo-helm
+# helm repo update
+# kubectl create ns argocd
+# kubectl apply -f service-account.yml
+# kubectl apply -f secrets.yml
+# kubectl apply -f git-cre.yml
+# helm install argocd argo/argo-cd -n argocd -f argo-values.yaml
+
+# helm install argocd-image-updater argo/argocd-image-updater -n argocd -f argocd-values.yml
+# kubectl rollout status deployment argocd-image-updater -n argocd
+# kubectl get pods -n argocd
+# kubectl logs <pod name>-n argocd
+
+
+# login to argocd:
+# kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base
+# 64 -d
+# argocd login localhost:8888 --insecure --username admin --password <pass>
+# argocd cluster add arn:aws:eks:<region>:661013218527:cluster/<cluster-name> --name <cluster-name> --yes
+# kubectl apply -f app-nodejs.yml
+
+# argocd repo add <repo.git> --username <username> --password <token>
+
+# docker build -t 661013218527.dkr.ecr.us-east-1.amazonaws.com/node-app-jenkins2:2.5.1 .
+# docker build -t 661013218527.dkr.ecr.us-east-1.amazonaws.com/node-app-jenkins2:2.5.1 . make sure you write tag bigger than 2.5.1
+
+# kubectl logs <image-updater-pod> -n argocd
