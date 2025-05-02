@@ -8,26 +8,6 @@ This infrastructure serves as the foundation for integrating CI/CD tools like Je
 
 ---
 
-## Project Structure 📁
-
-```
-infra/
-├── main.tf               # Main configuration file for AWS resources
-├── variables.tf          # Defines input variables for Terraform
-├── outputs.tf            # Outputs important resource information
-├── terraform.tfvars      # Environment-specific variables (e.g., region, instance types)
-├── modules/
-│   ├── network/          # Network resources: VPC, subnets, NAT gateway, IGW, route tables
-│   ├── eks/              # EKS cluster setup: Control plane, node groups
-│   ├── roles/            # IAM roles and policies for controlling access
-│   ├── secret_manager/   # Integration with AWS Secrets Manager for secrets storage
-│   ├── ebs/              # EBS resources (if applicable)
-│   ├── ecr/              # ECR resources (if applicable)
-
-```
-
----
-
 ## Modules 🧩
 
 ### `network` Module 🌐
@@ -163,19 +143,6 @@ This Terraform configuration provisions the following AWS resources:
 
 This section automates the deployment of Jenkins, a widely used open-source automation server, onto the EKS cluster provisioned earlier. Using Terraform's Helm provider, the official Jenkins Helm chart is configured and installed with custom values to expose Jenkins externally, configure volumes, and pre-install essential plugins.
 
-## 📁 Directory Structure
-
-Your `helm/` folder should contain the following files:
-
-```
-
-helm/
-├── helm_release.tf       # Defines the Helm release for Jenkins
-├── kubernetes.tf         # Configures Kubernetes provider
-├── values.yaml           # Custom Jenkins configuration
-├── versions.tf           # Specifies required provider versions
-
-```
 
 ---
 
