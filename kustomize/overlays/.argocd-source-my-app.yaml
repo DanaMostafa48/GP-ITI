@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - 661013218527.dkr.ecr.us-east-1.amazonaws.com/node-app-jenkins2:11.2.1
