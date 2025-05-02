@@ -458,13 +458,7 @@ resources:
 
 ```
 
-### 💡 Why use Kustomize?
 
-- Keeps your deployment modular and organized.
-- Lets you reuse and overlay configs across environments (e.g., dev, staging, prod).
-- Supports config changes without editing original manifests.
-
-🔗 It’s the tool that brings **structure and manageability** to your Kubernetes setup.
 
 ---
 
