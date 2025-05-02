@@ -2,10 +2,6 @@
 
 ## Overview 🛠️
 
-This setup provisions the core cloud infrastructure on AWS using modular Terraform components. It features a secure network architecture, a production-grade EKS cluster, and a remote backend for managing Terraform state. Each element is designed to be reusable, scalable, and version-controlled to support long-term maintainability.
-
-This infrastructure acts as the backbone for integrating CI/CD tools such as Jenkins, ArgoCD, and the External Secrets Operator, enabling secure and automated application deployments.
-
 ---
 
 ## Modules 🧩
