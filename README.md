@@ -222,7 +222,7 @@ Visit [http://localhost:8080](http://localhost:8080/) and log in with:
 - **Username**: `user` (from `values.yaml`)
 - **Password**: value from step 6
 
-# 🚀 Part 3: Kubernetes Deployment Guide: Node.js + MySQL + Redis on AWS EKS
+# 🚀 Part 4+5 : Kubernetes Deployment Guide: Node.js + MySQL + Redis on AWS EKS
 
 ## Overview 🛠️
 
