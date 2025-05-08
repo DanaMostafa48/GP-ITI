@@ -28,7 +28,7 @@ The project enables continuous integration and automated deployments for contain
 
 ## 🗺️ Architecture Diagram
 
-![WhatsApp Image 2025-05-02 at 8.24.23 PM.jpeg](attachment:3c9c2c02-47ac-4e99-8ebb-aca64bab01b2:WhatsApp_Image_2025-05-02_at_8.24.23_PM.jpeg)
+![Project Diagram](GP_diagram.jpeg)
 
 # 🚀 Part 1 : Infrastructure Overview and Module Breakdown
 
